@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block titulo %}{{lancamento.nome}}{% endblock %}
+{%block conteudo%}
+
+
+<h1 class="mt-5">{{ lancamento.nome }}</h1>
+<dl>
+  <dt>Tipo</dt>
+  <dd>{{ lancamento.tipo }}</dd>
+
+  <dt>Nome</dt>
+  <dd>{{ lancamento.nome }}</dd>
+
+  <dt>Valor</dt>
+  <dd>{{ lancamento.valor }}</dd>
+
+  <dt>Data do lançamento</dt>
+  <dd>{{ lancamento.data|date:'d/m/Y' }}</dd>
+
+  <dt>Categoria</dt>
+  <dd>{{ lancamento.categoria}}</dd>
+
+  <dt>Descrição</dt>
+  <dd>{{ lancamento.descricao }}</dd>
+
+  <dt>Tipo</dt>
+  <dd>{{ lancamento.tipo }}
+
+  </dd>
+</dl>
+
+{%endblock%}

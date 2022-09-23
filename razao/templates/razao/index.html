@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{%block titulo%}Controle de Caixa{%endblock%}
+{%block conteudo%}
+{% csrf_token %}
+<h1 class="mt-5">Razão</h1>
+<form method="get" action="{% url 'busca' %}">
+  <div class="form-group row">
+    <div class="col-12">
+      <input class="form-control"
+            type="search" value="{{ request.GET.termo }}"
+            id="search-input"
+            placeholder="Digite a sua pesquisa"
+            name="termo">
+      {% include 'parciais/_messages.html' %}
+      <div>
+      </div>
+    </form>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Data</th>
+      <th>Nome</th>
+      <th>Valor</th>
+      <th>Categoria</th>
+      <th>Tipo</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for lancamento in lancamentos %}
+    <tr>
+      <td>{{ lancamento.data|date:'d/m/Y'}}</td>
+      <td>
+        <a href="{% url 'ver_lancamento' lancamento.id %}"">{{ lancamento.nome }}</a>
+      </td>
+      <td>{{ lancamento.valor}}</td>
+      <td>{{ lancamento.categoria }}</td>
+      <td>{{ lancamento.tipo }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+<nav aria-label="Page navigation example">
+  <ul class="pagination">
+    {% for pagina in lancamentos.paginator.page_range %}
+      {% if lancamentos.number == pagina %}  
+        <li class="page-item active">
+          <a class="page-link" href="?p={{pagina}}&termo={{ request.GET.termo }}">{{ pagina }}</a></li>
+        </li>
+      {% else %}
+        <li class="page-item">
+          <a class="page-link" href="?p={{pagina}}&termo={{ request.GET.termo }}">{{ pagina }}</a></li>
+        </li>
+      {% endif %}
+    {% endfor %}
+  </ul>
+</nav>
+
+{%endblock%}
