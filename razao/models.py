@@ -23,6 +23,7 @@ class Lancamento(models.Model):
     data = models.DateTimeField(default=timezone.now)
     descricao = models.TextField(blank=True)
     tipo = models.ForeignKey(Tipo, on_delete=models.DO_NOTHING)
+    empresa = models.CharField(max_length=50, default='Sem empresa')
 
     def __str__(self):
         return self.nome

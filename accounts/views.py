@@ -34,12 +34,17 @@ def register(request):
     if request.method != 'POST':
         return render(request, 'accounts/register.html')
 
+    lista_codigos_empresas = {
+        '1178': 'Picoleve',
+    }
+
     nome = request.POST.get('nome')
     sobrenome = request.POST.get('sobrenome')
     email = request.POST.get('email')
     usuario = request.POST.get('usuario')
     senha = request.POST.get('senha')
     senha2 = request.POST.get('senha2')
+    codigo = request.POST.get('codigo')
 
     if not nome or not email or not usuario or not senha or not senha2:
         print(nome, email, usuario, senha, senha2)
@@ -51,6 +56,10 @@ def register(request):
        
     except:
         messages.error(request, 'Email inválido.')
+        return render(request, 'accounts/register.html')
+
+    if codigo not in lista_codigos_empresas:
+        messages.error(request, 'Código não pertence a nenhuma empresa cadastrada.')
         return render(request, 'accounts/register.html')
 
     if len(senha) <= 6:
@@ -84,7 +93,7 @@ def novo_lancamento(request):
         return render(request, 'accounts/novo_lancamento.html', {'form':form})
 
     form = FormLancamento(request.POST, request.FILES)
-    
+
     if not form.is_valid():
         messages.error(request, 'Erro ao enviar formulário.')
         form = FormLancamento(request.POST)
