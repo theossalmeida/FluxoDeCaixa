@@ -7,7 +7,6 @@ from django.db.models.functions import Concat
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.staticfiles.views import serve
-import reportlab
 
 @login_required(redirect_field_name='login')
 def index(request):
