@@ -6,8 +6,8 @@ from django.db.models import Q, Value
 from django.db.models.functions import Concat
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-
-
+from django.contrib.staticfiles.views import serve
+import reportlab
 
 @login_required(redirect_field_name='login')
 def index(request):
@@ -58,3 +58,6 @@ def busca(request):
     return render(request, 'razao/busca.html', {
         'lancamentos': lancamentos
     })
+
+def ver_arquivo(request, serve):
+    return render(serve, request, 'arquivos')

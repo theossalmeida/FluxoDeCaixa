@@ -138,3 +138,6 @@ MESSAGE_TAGS = {
 }
 
 django_heroku.settings(locals())
+
+MEDIA_URL = '/arquivos/'
+MEDIA_ROOT = BASE_DIR / 'arquivos'

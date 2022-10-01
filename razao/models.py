@@ -24,6 +24,7 @@ class Lancamento(models.Model):
     descricao = models.TextField(blank=True)
     tipo = models.ForeignKey(Tipo, on_delete=models.DO_NOTHING)
     empresa = models.CharField(max_length=50, default='Sem empresa')
+    arquivo = models.FileField(upload_to='arquivos/', blank=True)
 
     def __str__(self):
         return self.nome
